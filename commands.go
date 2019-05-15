@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"log"
 	"os/exec"
+	"strings"
 )
 
 /** 类似于python的commands库
@@ -42,7 +43,7 @@ func (c *Commands) GetOutput(command string, args ...string) (output string) {
 	if err != nil {
 		c.Output = err.Error()
 	} else {
-		c.Output = string(bytes)
+		c.Output = strings.Trim(string(bytes), "\n")
 	}
 	return c.Output
 }
@@ -61,7 +62,7 @@ func (c *Commands) GetStatusOutput(command string, args ...string) (status bool,
 	if err != nil {
 		c.Output = err.Error()
 	} else {
-		c.Output = bufferout.String()
+		c.Output = strings.Trim(bufferout.String(), "\n")
 	}
 	return c.Status, c.Output
 }
