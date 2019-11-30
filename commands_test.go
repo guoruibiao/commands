@@ -10,6 +10,9 @@ func Test_Run(t *testing.T) {
 	c.Run("ls", "-alhtr")
 
 	c.Run("du", "-alh")
+
+	//c.Run("osascript -e 'display notification \"内容体\" with title \"标题\"'")
+	c.Run(`osascript -e  'display notification "内容体" with title "标题"'`)
 }
 
 func Test_GetOutput(t *testing.T) {
