@@ -5,7 +5,7 @@ import (
 	"log"
 	"os/exec"
 	"strings"
-	)
+)
 
 /** 类似于python的commands库
  * - Run(command string, args...string) (void)
@@ -67,7 +67,6 @@ func (c *Commands) GetStatusOutput(command string, args ...string) (status bool,
 		c.Error = err
 	} else {
 		c.Status = cmd.ProcessState.Success()
-		c.Output = strings.Trim(bufferout.String(), "\n")
 	}
 	return c.Status, c.Output
 }

@@ -1,4 +1,12 @@
 # Commands 
+<<<<<<< HEAD
+=======
+
+[![GoDoc](https://godoc.org/github.com/guoruibiao/commands?status.svg)](https://godoc.org/github.com/guoruibiao/commands)
+
+
+
+>>>>>>> c267f0f355fd99f015dd5925a4dfd945363656bf
 reference from `commands` in Python. Do some commands if you need, with optional choice of `Status` and `Output`.
 
 ## Support features
@@ -40,4 +48,8 @@ func main() {
 
 There are also some new features to be added, so happy to see your PRs.
 
+<<<<<<< HEAD
 finally, enjoy it.
+=======
+finally, enjoy it.
+>>>>>>> c267f0f355fd99f015dd5925a4dfd945363656bf
