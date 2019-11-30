@@ -11,12 +11,7 @@ reference from `commands` in Python. Do some commands if you need, with optional
 - `GetOutput(command string, args...string) (output string)` with output of command
 - `GetStatusOutput(command string, args...string) (status bool, output string)` with status and output of commands
 
-## TODO
 
-`commands` support single Shell command Currently, can not work well with multi-commands. such as:
-```
-cat xxx | grep yyy | tac
-```
 
 ## Demos
 ```

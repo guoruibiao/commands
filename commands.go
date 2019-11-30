@@ -5,13 +5,16 @@ import (
 	"log"
 	"os/exec"
 	"strings"
-)
+	)
 
 /** 类似于python的commands库
  * - Run(command string, args...string) (void)
  * - GetOutput(command string, args...string) (output string)
  * - GetStatusOutput(command string, args...string) (status bool, output string)
  **/
+
+ // 执行连续的shell命令时, 需要注意指定执行路径和参数, 否则运行出错
+ // 比如 /bin/sh -c multi-commands-string
 
 // Commands define the structure
 type Commands struct {
@@ -33,7 +36,8 @@ func New() *Commands {
 
 // Run commands without any output
 func (c *Commands) Run(command string, args ...string) {
-	cmd := exec.Command(command, args...)
+	args = append([]string{"-c", command}, args...)
+	cmd := exec.Command("/bin/sh", args...)
 	if err := cmd.Run(); err != nil {
 		c.Error = err
 		log.Fatal(err)
@@ -42,7 +46,8 @@ func (c *Commands) Run(command string, args ...string) {
 
 // GetOutput run commands without status, but the output
 func (c *Commands) GetOutput(command string, args ...string) (output string) {
-	bytes, err := exec.Command(command, args...).Output()
+	args = append([]string{"-c", command}, args...)
+	bytes, err := exec.Command("/bin/sh", args...).Output()
 	if err != nil {
 		c.Output = err.Error()
 		c.Error = err
@@ -54,7 +59,8 @@ func (c *Commands) GetOutput(command string, args ...string) (output string) {
 
 // GetStatusOutput run commands with status and output
 func (c *Commands) GetStatusOutput(command string, args ...string) (status bool, output string) {
-	cmd := exec.Command(command, args...)
+	args = append([]string{"-c", command}, args...)
+	cmd := exec.Command("/bin/sh", args...)
 	var bufferout, bufferin, buffererr bytes.Buffer
 	cmd.Stdout = &bufferout
 	cmd.Stdin = &bufferin
@@ -67,6 +73,7 @@ func (c *Commands) GetStatusOutput(command string, args ...string) (status bool,
 		c.Error = err
 	} else {
 		c.Status = cmd.ProcessState.Success()
+		c.Output = bufferout.String()
 	}
 	return c.Status, c.Output
 }
