@@ -44,6 +44,15 @@ func (c *Commands) Run(command string, args ...string) {
 	}
 }
 
+// Run outer commands
+func (c *Commands) OuterRun(command string, args ...string) {
+	_, err := exec.Command("tesseract", args...).Output()
+	if err != nil {
+		c.Error = err
+		log.Fatal(err)
+	}
+}
+
 // GetOutput run commands without status, but the output
 func (c *Commands) GetOutput(command string, args ...string) (output string) {
 	args = append([]string{"-c", command}, args...)
